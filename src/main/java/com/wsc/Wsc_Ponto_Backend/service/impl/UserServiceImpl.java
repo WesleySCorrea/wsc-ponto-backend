@@ -1,0 +1,26 @@
+package com.wsc.Wsc_Ponto_Backend.service.impl;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.UserRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.UsuarioResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.entity.User;
+import com.wsc.Wsc_Ponto_Backend.repository.UserRepository;
+import com.wsc.Wsc_Ponto_Backend.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository repository;
+
+    @Override
+    public UsuarioResponseDTO save(UserRequestDTO request) {
+
+        User user = request.toEntity(request);
+
+        user = repository.save(user);
+
+        return new UsuarioResponseDTO(user);
+    }
+}

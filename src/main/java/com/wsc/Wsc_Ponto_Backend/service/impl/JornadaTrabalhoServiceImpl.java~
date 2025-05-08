@@ -1,0 +1,27 @@
+package com.wsc.Wsc_Ponto_Backend.service.impl;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.WorkScheduleRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.JornadaTrabalhoResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;
+import com.wsc.Wsc_Ponto_Backend.repository.JornadaTrabalhoRepository;
+import com.wsc.Wsc_Ponto_Backend.service.JornadaTrabalhoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class JornadaTrabalhoServiceImpl implements JornadaTrabalhoService {
+
+    private final JornadaTrabalhoRepository repository;
+
+    @Override
+    public JornadaTrabalhoResponseDTO salvar(WorkScheduleRequestDTO request) {
+
+        WorkSchedule jornada = request.toEntity(request);
+
+        jornada = repository.save(jornada);
+
+        System.out.println(jornada.getCompany().getCompanyName());
+        return new JornadaTrabalhoResponseDTO(jornada);
+    }
+}

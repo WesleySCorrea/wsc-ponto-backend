@@ -1,0 +1,93 @@
+package com.wsc.Wsc_Ponto_Backend.entity;
+
+import com.wsc.Wsc_Ponto_Backend.enuns.RoleEnum;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "usuario")
+public class Usuario implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nome", nullable = false)
+    private String nome;
+
+    @Column(name = "sobrenome", nullable = false)
+    private String sobrenome;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "senha", nullable = false)
+    private String senha;
+
+    @Column(name = "data_cadastro", updatable = false)
+    private LocalDateTime dataCadastro;
+
+    @Column(name = "data_alteracao")
+    private LocalDateTime dataAlteracao;
+
+    @Column(name = "ativo")
+    private Boolean ativo;
+
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
+
+    @Column(name = "tentativas_login")
+    private Integer tentativasLogin;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Company company;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jornada_trabalho")
+    private JornadaTrabalho jornadaTrabalho;
+
+    @PrePersist
+    public void prePersist() {
+        this.dataCadastro = LocalDateTime.now();
+        this.dataAlteracao = LocalDateTime.now();
+        this.ativo = true;
+        this.role = RoleEnum.USER;
+        this.tentativasLogin = 0;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.dataAlteracao = LocalDateTime.now();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getPassword();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return ativo;
+    }
+}

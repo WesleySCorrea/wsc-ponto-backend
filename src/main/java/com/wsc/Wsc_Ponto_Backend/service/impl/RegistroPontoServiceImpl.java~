@@ -1,0 +1,40 @@
+package com.wsc.Wsc_Ponto_Backend.service.impl;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.RegistroPontoRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.RegistroPontoResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.entity.TimeRecord;
+import com.wsc.Wsc_Ponto_Backend.enuns.TypeEnum;
+import com.wsc.Wsc_Ponto_Backend.repository.RegistroPontoRepository;
+import com.wsc.Wsc_Ponto_Backend.service.RegistroPontoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+
+@Service
+@RequiredArgsConstructor
+public class RegistroPontoServiceImpl implements RegistroPontoService {
+
+    private final RegistroPontoRepository repository;
+
+    @Override
+    public RegistroPontoResponseDTO registrarPonto(RegistroPontoRequestDTO request) {
+
+        TypeEnum typeEnum = this.tipoRegistro(request.getUserId());
+
+        TimeRecord registro = request.toEntity(request, typeEnum);
+
+        registro = repository.save(registro);
+
+        return new RegistroPontoResponseDTO(registro);
+    }
+
+    private TypeEnum tipoRegistro (Long idUsuario) {
+
+        Double qntdRegistrosDia = repository.countByUsuarioIdAndData(idUsuario, LocalDate.now());
+        if (qntdRegistrosDia % 2 != 0 ) {
+            return TypeEnum.SAIDA;
+        }
+        return TypeEnum.ENTRADA;
+    }
+}

@@ -1,0 +1,31 @@
+package com.wsc.Wsc_Ponto_Backend.DTO.response;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.wsc.Wsc_Ponto_Backend.entity.Company;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EmpresaResponseDTO {
+
+    private Long id;
+    private String razaoSocial;
+    private String cnpj;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataCadastro;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataAlteracao;
+    private Boolean ativo;
+
+    public EmpresaResponseDTO (Company company) {
+        this.id = company.getId();
+        this.razaoSocial = company.getCompanyName();
+        this.cnpj = company.getCnpj();
+        this.dataCadastro = company.getDataCadastro();
+        this.dataAlteracao = company.getDataAlteracao();
+        this.ativo = company.getAtivo();
+    }
+}

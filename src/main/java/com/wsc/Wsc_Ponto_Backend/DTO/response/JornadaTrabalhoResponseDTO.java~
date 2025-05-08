@@ -1,0 +1,52 @@
+package com.wsc.Wsc_Ponto_Backend.DTO.response;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;
+import com.wsc.Wsc_Ponto_Backend.entity.User;
+import lombok.Getter;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+@Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class JornadaTrabalhoResponseDTO {
+
+    private Long id;
+    private String nome;
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalTime horaEntrada;
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalTime horaSaida;
+    private int toleranciaEntrada;
+    private int toleranciaSaida;
+    private String tempoDescanso;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataCadastro;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataAlteracao;
+    private EmpresaResponseDTO empresa;
+    private User criadoPor;
+
+    public JornadaTrabalhoResponseDTO (WorkSchedule jornada) {
+        this.id = jornada.getId();
+        this.nome = jornada.getNome();
+        this.horaEntrada = jornada.getHoraEntrada();
+        this.horaSaida = jornada.getHoraSaida();
+        this.toleranciaEntrada = jornada.getToleranciaEntrada();
+        this.toleranciaSaida = jornada.getToleranciaSaida();
+        this.tempoDescanso = formatDuration(jornada.getTempoDescanso());
+        this.dataCadastro = jornada.getDataCadastro();
+        this.dataAlteracao = jornada.getDataAlteracao();
+        this.empresa = new EmpresaResponseDTO(jornada.getCompany());
+        this.criadoPor = jornada.getCriadoPor();
+    }
+
+    private String formatDuration(Duration duration) {
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+        return String.format("%d:%02d:00", hours, minutes);
+    }
+}

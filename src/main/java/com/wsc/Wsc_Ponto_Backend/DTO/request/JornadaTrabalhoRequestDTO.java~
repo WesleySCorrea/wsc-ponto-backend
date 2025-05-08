@@ -1,0 +1,48 @@
+package com.wsc.Wsc_Ponto_Backend.DTO.request;
+
+import com.wsc.Wsc_Ponto_Backend.entity.Company;
+import com.wsc.Wsc_Ponto_Backend.entity.JornadaTrabalho;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+
+import java.time.Duration;
+import java.time.LocalTime;
+
+@Getter
+public class JornadaTrabalhoRequestDTO {
+
+    @NotBlank(message = "Nome da jornada deve ser obrigatória")
+    @Size(min = 3, max = 25, message = "Nome da Jornada deve ter entre 3 e 25 caracteres")
+    private String nome;
+    @NotNull(message = "Horário de entrada é obrigatório")
+    private LocalTime horaEntrada;
+    @NotNull(message = "Horário de saída é obrigatório")
+    private LocalTime horaSaida;
+    @NotNull(message = "Tolerancia de entrada é obrigatória")
+    private int toleranciaEntrada;
+    @NotNull(message = "Tolerancia de saída é obrigatória")
+    private int toleranciaSaida;
+    @NotNull(message = "Tempo de descanso é obrigatório")
+    private Duration tempoDescanso;
+    @NotNull(message = "ID da empresa é obrigatório")
+    private Long idEmpresa;
+    private Long idUsuario;
+
+    public JornadaTrabalho toEntity (JornadaTrabalhoRequestDTO request) {
+        JornadaTrabalho jornada = new JornadaTrabalho();
+        jornada.setNome(request.getNome());
+        jornada.setHoraEntrada(request.getHoraEntrada());
+        jornada.setHoraSaida(request.getHoraSaida());
+        jornada.setToleranciaEntrada(request.toleranciaEntrada);
+        jornada.setToleranciaSaida(request.toleranciaSaida);
+        jornada.setTempoDescanso(request.getTempoDescanso());
+        Company company = new Company();
+        company.setId(request.idEmpresa);
+        jornada.setCompany(company);
+
+
+        return jornada;
+    }
+}

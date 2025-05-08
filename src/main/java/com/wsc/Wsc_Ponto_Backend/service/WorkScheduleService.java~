@@ -1,0 +1,9 @@
+package com.wsc.Wsc_Ponto_Backend.service;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.WorkScheduleRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.WorkScheduleResponseDTO;
+
+public interface WorkScheduleService {
+
+    WorkScheduleResponseDTO salvar(WorkScheduleRequestDTO request);
+}

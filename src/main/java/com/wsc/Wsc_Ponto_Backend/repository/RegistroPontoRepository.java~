@@ -1,0 +1,13 @@
+package com.wsc.Wsc_Ponto_Backend.repository;
+
+import com.wsc.Wsc_Ponto_Backend.entity.RegistroPonto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+
+@Repository
+public interface RegistroPontoRepository extends JpaRepository<RegistroPonto, Long> {
+
+    Double countByUsuarioIdAndData(Long idUsuario, LocalDate data);
+}

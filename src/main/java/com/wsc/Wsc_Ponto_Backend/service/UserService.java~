@@ -1,0 +1,9 @@
+package com.wsc.Wsc_Ponto_Backend.service;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.UserRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.UsuarioResponseDTO;
+
+public interface UserService {
+
+    UsuarioResponseDTO salvar(UserRequestDTO request);
+}

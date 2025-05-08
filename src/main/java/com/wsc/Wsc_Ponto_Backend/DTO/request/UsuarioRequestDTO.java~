@@ -1,0 +1,47 @@
+package com.wsc.Wsc_Ponto_Backend.DTO.request;
+
+import com.wsc.Wsc_Ponto_Backend.entity.Company;
+import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;
+import com.wsc.Wsc_Ponto_Backend.entity.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+
+@Getter
+public class UsuarioRequestDTO {
+
+    @NotBlank(message = "O nome é obrigatória")
+    @Size(min = 5, max = 25, message = "O nome deve ter entre 5 e 25 caracteres")
+    private String nome;
+    @NotBlank(message = "O sobrenome é obrigatória")
+    @Size(min = 5, max = 50, message = "O sobrenome deve ter entre 5 e 50 caracteres")
+    private String sobrenome;
+    @NotBlank(message = "O email é obrigatório")
+    @Email(message = "O email deve ser válido")
+    private String email;
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 6, max = 16, message = "Senha deve conter entre 6 e 16 caracteres")
+    private String senha;
+    @NotNull(message = "O id da empresa é obrigatória")
+    private Long idEmpresa;
+    @NotNull(message = "O id da jornada de trabalho é obrigatória")
+    private Long idJornadaTrabalho;
+
+    public User toEntity (UsuarioRequestDTO request) {
+        User user = new User();
+        user.setNome(request.nome);
+        user.setSobrenome(request.sobrenome);
+        user.setEmail(request.email);
+        user.setSenha(request.senha);
+        Company company = new Company();
+        company.setId(request.idEmpresa);
+        user.setCompany(company);
+        WorkSchedule workSchedule = new WorkSchedule();
+        workSchedule.setId(request.idJornadaTrabalho);
+        user.setWorkSchedule(workSchedule);
+
+        return user;
+    }
+}

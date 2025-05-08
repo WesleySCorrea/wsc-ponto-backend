@@ -1,0 +1,26 @@
+package com.wsc.Wsc_Ponto_Backend.service.impl;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.request.CompanyRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.EmpresaResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.entity.Company;
+import com.wsc.Wsc_Ponto_Backend.repository.EmpresaRepository;
+import com.wsc.Wsc_Ponto_Backend.service.EmpresaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class EmpresaServiceImpl implements EmpresaService {
+
+    private final EmpresaRepository repository;
+
+    @Override
+    public EmpresaResponseDTO salvar(CompanyRequestDTO request) {
+
+        Company company = request.toEntity(request);
+
+        company = repository.save(company);
+
+        return new EmpresaResponseDTO(company);
+    }
+}
