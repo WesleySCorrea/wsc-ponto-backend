@@ -1,21 +1,43 @@
 package com.wsc.Wsc_Ponto_Backend.service.impl;
 
+import com.wsc.Wsc_Ponto_Backend.DTO.UserDTO;
 import com.wsc.Wsc_Ponto_Backend.DTO.request.LoginRequestDTO;
 import com.wsc.Wsc_Ponto_Backend.DTO.response.LoginResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.service.AuthService;
+import com.wsc.Wsc_Ponto_Backend.service.JwtService;
+import com.wsc.Wsc_Ponto_Backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+    private final JwtService jwtService;
+    private final UserService userService;
+//    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
 
+        //Busca usuario pelo email
+        UserDTO userDTO = userService.findByEmail(request.getEmail());
 
+        //Valida password
+//        validatePassword(request.getPassword(), userDTO.getPassword());
+        if (!request.getPassword().equals(userDTO.getPassword())) {
+            throw new RuntimeException("Senha inválida");
+        }
 
+        //Gerar Access Token e Refresh Token
+        LoginResponseDTO response = jwtService.generateToken(userDTO);
 
-        return new LoginResponseDTO();
+        return response;
     }
+
+//    private void validatePassword(String rawPassword, String encryptedPassword) {
+//        if (!passwordEncoder.matches(rawPassword, encryptedPassword)) {
+//            throw new RuntimeException("Senha inválida");
+//        }
+//    }
 }

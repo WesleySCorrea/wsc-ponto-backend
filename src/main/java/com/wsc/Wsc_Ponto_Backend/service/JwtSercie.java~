@@ -1,0 +1,8 @@
+package com.wsc.Wsc_Ponto_Backend.service;
+
+import com.wsc.Wsc_Ponto_Backend.DTO.UserDTO;
+
+public interface JwtSercie {
+    String generateAccessToken(UserDTO user);
+    Boolean isTokenValid(String token, UserDTO userDetails);
+}

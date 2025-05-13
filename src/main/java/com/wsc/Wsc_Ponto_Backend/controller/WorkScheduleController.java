@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/work-schedule")
+@RequestMapping("/v1/work-schedule")
 public class WorkScheduleController {
 
     private final WorkScheduleService workScheduleService;

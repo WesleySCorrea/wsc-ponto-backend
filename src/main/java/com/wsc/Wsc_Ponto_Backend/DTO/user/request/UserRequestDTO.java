@@ -1,4 +1,4 @@
-package com.wsc.Wsc_Ponto_Backend.DTO.request;
+package com.wsc.Wsc_Ponto_Backend.DTO.user.request;
 
 import com.wsc.Wsc_Ponto_Backend.entity.Company;
 import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;

@@ -2,6 +2,7 @@ package com.wsc.Wsc_Ponto_Backend.DTO.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.wsc.Wsc_Ponto_Backend.DTO.company.response.CompanyResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;
 import com.wsc.Wsc_Ponto_Backend.entity.User;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.wsc.Wsc_Ponto_Backend.controller;
 
 import com.wsc.Wsc_Ponto_Backend.DTO.request.UserRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.UsuarioResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.UserResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/usuario")
+@RequestMapping("/v1/user")
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> salvar(@RequestBody @Valid UserRequestDTO request) {
+    public ResponseEntity<UserResponseDTO> salvar(@RequestBody @Valid UserRequestDTO request) {
 
         return ResponseEntity.ok().body(userService.save(request));
     }

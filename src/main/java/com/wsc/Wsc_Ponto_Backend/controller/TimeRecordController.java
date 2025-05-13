@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/time-record")
+@RequestMapping("/v1/time-record")
 public class TimeRecordController {
 
     private final TimeRecordService timeRecordService;

@@ -1,7 +1,7 @@
 package com.wsc.Wsc_Ponto_Backend.service.impl;
 
-import com.wsc.Wsc_Ponto_Backend.DTO.request.CompanyRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.CompanyResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.company.request.CompanyRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.company.response.CompanyResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.entity.Company;
 import com.wsc.Wsc_Ponto_Backend.repository.CompanyRepository;
 import com.wsc.Wsc_Ponto_Backend.service.CompanyService;

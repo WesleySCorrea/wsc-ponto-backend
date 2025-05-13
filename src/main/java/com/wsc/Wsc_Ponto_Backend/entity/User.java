@@ -49,6 +49,12 @@ public class User implements UserDetails {
     @Column(name = "login_attempts")
     private Integer loginAttempts;
 
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
+
+    @Column(name = "last_login_ip")
+    private String lastLoginIp;
+
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;

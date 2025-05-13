@@ -1,4 +1,4 @@
-package com.wsc.Wsc_Ponto_Backend.DTO.request;
+package com.wsc.Wsc_Ponto_Backend.DTO.company.request;
 
 import com.wsc.Wsc_Ponto_Backend.entity.Company;
 import jakarta.validation.constraints.NotBlank;

@@ -1,9 +1,12 @@
 package com.wsc.Wsc_Ponto_Backend.service;
 
+import com.wsc.Wsc_Ponto_Backend.DTO.UserDTO;
 import com.wsc.Wsc_Ponto_Backend.DTO.request.UserRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.UsuarioResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.response.UserResponseDTO;
 
 public interface UserService {
 
-    UsuarioResponseDTO salvar(UserRequestDTO request);
+    UserResponseDTO save(UserRequestDTO request);
+    UserDTO findByEmail(String email);
+
 }

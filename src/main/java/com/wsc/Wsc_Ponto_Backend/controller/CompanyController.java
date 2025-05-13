@@ -1,7 +1,7 @@
 package com.wsc.Wsc_Ponto_Backend.controller;
 
-import com.wsc.Wsc_Ponto_Backend.DTO.request.CompanyRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.CompanyResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.company.request.CompanyRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.company.response.CompanyResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.service.CompanyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/company")
+@RequestMapping("/v1/company")
 public class CompanyController {
 
     private final CompanyService companyService;
