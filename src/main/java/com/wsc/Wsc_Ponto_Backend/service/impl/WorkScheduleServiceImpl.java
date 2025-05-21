@@ -1,7 +1,7 @@
 package com.wsc.Wsc_Ponto_Backend.service.impl;
 
-import com.wsc.Wsc_Ponto_Backend.DTO.request.WorkScheduleRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.WorkScheduleResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.workSchedule.request.WorkScheduleRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.workSchedule.response.WorkScheduleResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.entity.WorkSchedule;
 import com.wsc.Wsc_Ponto_Backend.repository.WorkScheduleRepository;
 import com.wsc.Wsc_Ponto_Backend.service.WorkScheduleService;

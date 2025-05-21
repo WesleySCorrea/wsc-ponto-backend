@@ -1,9 +1,9 @@
 package com.wsc.Wsc_Ponto_Backend.service;
 
-import com.wsc.Wsc_Ponto_Backend.DTO.UserDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.LoginResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.auth.response.LoginResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.user.UserInfoDTO;
 
 public interface JwtService {
-    LoginResponseDTO generateToken(UserDTO user);
-    Boolean isTokenValid(String token, UserDTO userDetails);
+    LoginResponseDTO generateToken(UserInfoDTO user);
+    UserInfoDTO validateTokenAndExtractUserInfo(String accessToken);
 }

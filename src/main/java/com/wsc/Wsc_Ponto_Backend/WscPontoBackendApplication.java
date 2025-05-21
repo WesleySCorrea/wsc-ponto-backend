@@ -9,5 +9,4 @@ public class WscPontoBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WscPontoBackendApplication.class, args);
 	}
-
 }

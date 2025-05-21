@@ -1,7 +1,7 @@
 package com.wsc.Wsc_Ponto_Backend.controller;
 
-import com.wsc.Wsc_Ponto_Backend.DTO.request.WorkScheduleRequestDTO;
-import com.wsc.Wsc_Ponto_Backend.DTO.response.WorkScheduleResponseDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.workSchedule.request.WorkScheduleRequestDTO;
+import com.wsc.Wsc_Ponto_Backend.DTO.workSchedule.response.WorkScheduleResponseDTO;
 import com.wsc.Wsc_Ponto_Backend.service.WorkScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

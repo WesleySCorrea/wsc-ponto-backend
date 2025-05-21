@@ -1,23 +1,33 @@
 package com.wsc.Wsc_Ponto_Backend.config;
 
+import com.wsc.Wsc_Ponto_Backend.DTO.user.UserInfoDTO;
+import com.wsc.Wsc_Ponto_Backend.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-//    private final TokenService tokenService;
+
+    private final JwtService jwtService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if (request.getRequestURI().equals("/api/v1/login/refresh") || request.getRequestURI().equals("/api/v1/login")
-                || request.getRequestURI().equals("/api/v1/user") || request.getRequestURI().equals("/api/v1/company")
+        if (request.getRequestURI().equals("/api/v1/auth/login/refresh") || request.getRequestURI().equals("/api/v1/auth/login")
+                || request.getRequestURI().equals("/api/v1/auth/recovery-password") || request.getRequestURI().equals("/api/v1/company")
+                || request.getRequestURI().equals("/api/v1/work-schedule")
                 || request.getRequestURI().equals("/api/v1/user") || request.getRequestURI().equals("/api/v1/company")) {
 
             filterChain.doFilter(request, response);
@@ -28,17 +38,17 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = this.getTokenFromRequest(request);
 
 
-//            UserInfoDTO userInfoDTO = tokenService.validateTokenAndExtractUserInfo(token);
-//
-//            UsernamePasswordAuthenticationToken authentication =
-//                    new UsernamePasswordAuthenticationToken(
-//                            userInfoDTO.getUsername(),
-//                            null,
-//                            List.of(new SimpleGrantedAuthority("ROLE_" + userInfoDTO.getRole().name()))
-//                    );
-//            authentication.setDetails(userInfoDTO);
-//
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserInfoDTO userInfoDTO = jwtService.validateTokenAndExtractUserInfo(token);
+
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            userInfoDTO.getName(),
+                            null,
+                            List.of(new SimpleGrantedAuthority("ROLE_" + userInfoDTO.getRole().name()))
+                    );
+            authentication.setDetails(userInfoDTO);
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 
